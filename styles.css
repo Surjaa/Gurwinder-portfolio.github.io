@@ -4,6 +4,14 @@
   font-family: monospace;
 }
 
+.container{
+  font-size: 14.5px;
+}
+
+.button{
+  font-size: 20px;
+}
+
 body {
   scroll-behavior: smooth;
 }
@@ -22,11 +30,11 @@ body {
 .container {
   opacity: 0;
   transform: scale(0.5);
-  animation: none; /* Remove transition to use animation only */
+  animation: none;
 }
 
 .container.is-visible {
-  animation: appear 0.5s forwards; /* Use forwards to maintain the final state after the animation ends */
+  animation: appear 0.5s forwards;
 }
 
 .cnct {
