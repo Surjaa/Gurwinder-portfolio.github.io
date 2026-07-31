@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   containers.forEach((container) => observer.observe(container));
 });
 
-const titles = ["Technical Content Writer", "IT Intern"];
+const titles = ["Technical Content Writer", "System Analyst"];
 let titleIndex = 0;
 let charIndex = 0;
 const textElement = document.getElementById("animated-text");
