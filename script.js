@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // ==========================================
+  // CONTAINER SCROLL ANIMATION
+  // ==========================================
+
   const containers = document.querySelectorAll(".container");
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -12,67 +17,110 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { threshold: 0.1 }
   );
+
   containers.forEach((container) => observer.observe(container));
-});
 
-const titles = ["Technical Content Writer", "System Analyst"];
-let titleIndex = 0;
-let charIndex = 0;
-const textElement = document.getElementById("animated-text");
 
-function typeEffect() {
-  if (charIndex < titles[titleIndex].length) {
-    textElement.innerHTML += titles[titleIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(typeEffect, 100);
-  } else {
-    setTimeout(eraseEffect, 2000);
+  // ==========================================
+  // ANIMATED JOB TITLE
+  // ==========================================
+
+  const titles = ["Technical Content Writer", "System Analyst"];
+  let titleIndex = 0;
+  let charIndex = 0;
+
+  const textElement = document.getElementById("animated-text");
+
+  function typeEffect() {
+    if (!textElement) return;
+
+    if (charIndex < titles[titleIndex].length) {
+      textElement.innerHTML += titles[titleIndex].charAt(charIndex);
+      charIndex++;
+
+      setTimeout(typeEffect, 100);
+    } else {
+      setTimeout(eraseEffect, 2000);
+    }
   }
-}
 
-function eraseEffect() {
-  if (charIndex > 0) {
-    textElement.innerHTML = titles[titleIndex].substring(0, charIndex - 1);
-    charIndex--;
-    setTimeout(eraseEffect, 50);
-  } else {
-    titleIndex = (titleIndex + 1) % titles.length;
-    setTimeout(typeEffect, 500);
+  function eraseEffect() {
+    if (!textElement) return;
+
+    if (charIndex > 0) {
+      textElement.innerHTML = titles[titleIndex].substring(
+        0,
+        charIndex - 1
+      );
+
+      charIndex--;
+
+      setTimeout(eraseEffect, 50);
+    } else {
+      titleIndex = (titleIndex + 1) % titles.length;
+
+      setTimeout(typeEffect, 500);
+    }
   }
-}
 
-document.addEventListener("DOMContentLoaded", () => {
   setTimeout(typeEffect, 500);
-});
 
-// Initialize EmailJS with your Public Key
-emailjs.init("hjDYho1Zz-aNreUSw"); // Replace with your Public Key
 
-document
-  .getElementById("contact-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission
+  // ==========================================
+  // EMAILJS CONTACT FORM
+  // ==========================================
 
-    emailjs.sendForm("service_0iczgm3", "template_5uucrae", this).then(
-      function (response) {
-        console.log("Success!", response.status, response.text);
-        document.getElementById("contact-form").reset(); // Reset the form after submission
-      },
-      function (error) {
-        console.log("Failed", error);
-        document.getElementById("status-message").innerHTML =
-          "<span style='color: red;'>Message Failed. Try Again.</span>";
+  // Initialize EmailJS
+  emailjs.init("hjDYho1Zz-aNreUSw");
+
+  const contactForm = document.getElementById("contact-form");
+  const statusMessage = document.getElementById("status-message");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Show sending message
+      if (statusMessage) {
+        statusMessage.innerHTML =
+          "<span style='color: orange;'>Sending...</span>";
       }
-    );
-  });
 
-document
-  .getElementById("contact-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default submission
+      // Send form using EmailJS
+      emailjs
+        .sendForm(
+          "service_0iczgm3",
+          "template_5uucrae",
+          contactForm
+        )
+        .then(
+          function (response) {
+            console.log(
+              "SUCCESS!",
+              response.status,
+              response.text
+            );
 
-    setTimeout(() => {
-      alert("Thank you for your feedback. I'll be in touch shortly!");
-      document.getElementById("contact-form").reset(); // Reset form
-    }, 1000);
-  });
+            if (statusMessage) {
+              statusMessage.innerHTML =
+                "<span style='color: green;'>Message Sent Successfully!</span>";
+            }
+
+            // Clear form
+            contactForm.reset();
+          },
+
+          function (error) {
+            console.error("EMAILJS ERROR:", error);
+            console.error("ERROR STATUS:", error.status);
+            console.error("ERROR TEXT:", error.text);
+
+            if (statusMessage) {
+              statusMessage.innerHTML =
+                "<span style='color: red;'>Message Failed. Try Again.</span>";
+            }
+          }
+        );
+    });
+  }
+});
