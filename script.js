@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Send form using EmailJS
       emailjs
         .sendForm(
-          "service_0iczgm3",
+          "service_3l7btav",
           "template_5uucrae",
           contactForm
         )
