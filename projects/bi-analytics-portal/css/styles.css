@@ -1,0 +1,173 @@
+/* ==========================================================================
+   styles.css  -  THE LOOK OF THE PORTAL (Power BI inspired)
+   ==========================================================================
+   Layout summary:
+     .app      = whole screen, 2 columns: sidebar | content
+     .grid     = 12-column CSS grid where the cards live (.span-4, .span-8 ...)
+     .card     = white tile with a title and a chart inside
+   Design tokens (colours, spacing) are CSS variables at the top so the whole
+   theme can be changed in one place.
+   ========================================================================== */
+
+:root {
+  --yellow: #F2C811;          /* Power BI signature yellow, used for the active menu item */
+  --blue: #118DFF;
+  --ink: #252423;             /* main text */
+  --muted: #605E5C;           /* secondary text */
+  --line: #E1DFDD;            /* borders */
+  --canvas: #F3F2F1;          /* page background */
+  --card: #FFFFFF;
+  --side: #1F1E1D;            /* sidebar background */
+  --good: #107C41;
+  --bad: #C4314B;
+  --radius: 4px;
+  --font: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }                       /* padding never makes elements wider than set */
+html, body { margin: 0; height: 100%; }
+body { font-family: var(--font); color: var(--ink); background: var(--canvas); font-size: 14px; }
+
+/* ---------------- Page frame ---------------- */
+.app { display: flex; min-height: 100vh; }
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; }   /* min-width:0 lets charts shrink */
+
+/* ---------------- Sidebar ---------------- */
+.sidebar { width: 232px; background: var(--side); color: #d7d5d3; display: flex; flex-direction: column; flex-shrink: 0; position: sticky; top: 0; height: 100vh; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 18px 18px 14px; font-weight: 600; font-size: 16px; color: #fff; }
+.logo { display: inline-flex; align-items: flex-end; gap: 2px; height: 22px; }       /* three little bars = Power BI style logo */
+.logo i { display: block; width: 5px; background: var(--yellow); border-radius: 1px; }
+.logo i:nth-child(1) { height: 10px; opacity: .7; }
+.logo i:nth-child(2) { height: 16px; opacity: .85; }
+.logo i:nth-child(3) { height: 22px; }
+#nav { flex: 1; padding: 6px 0; overflow-y: auto; }
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 18px; color: #c8c6c4; text-decoration: none; border-left: 4px solid transparent; }
+.nav-item:hover { background: #2d2c2b; color: #fff; }
+.nav-item.active { background: #323130; color: #fff; border-left-color: var(--yellow); font-weight: 600; }
+.nav-item .ico { width: 18px; text-align: center; color: var(--yellow); }
+.side-foot { padding: 14px 18px; font-size: 11.5px; color: #8a8886; border-top: 1px solid #323130; line-height: 1.4; }
+
+/* ---------------- Top bar (title + filters) ---------------- */
+.topbar { background: #fff; border-bottom: 1px solid var(--line); padding: 10px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; position: sticky; top: 0; z-index: 20; }
+.topbar h1 { font-size: 19px; font-weight: 600; margin: 0; white-space: nowrap; }
+.menu-btn { display: none; border: 1px solid var(--line); background: #fff; font-size: 18px; border-radius: var(--radius); padding: 4px 10px; cursor: pointer; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin-left: auto; }
+.filters label { display: flex; flex-direction: column; font-size: 11.5px; color: var(--muted); gap: 2px; }
+select, input[type=search] { font: inherit; font-size: 13px; color: var(--ink); background: #fff; border: 1px solid #C8C6C4; border-radius: var(--radius); padding: 5px 8px; min-width: 112px; }
+select:disabled { background: #F3F2F1; color: #A19F9D; }
+select:focus-visible, input:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }   /* visible keyboard focus */
+
+.btn { font: inherit; font-size: 13px; border: 1px solid #C8C6C4; background: #fff; border-radius: var(--radius); padding: 6px 12px; cursor: pointer; color: var(--ink); }
+.btn:hover { background: #F3F2F1; }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.sm { padding: 3px 9px; font-size: 12px; }
+
+/* ---------------- Sub bar (breadcrumb + chips) ---------------- */
+.subbar { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding: 9px 20px; background: #FAF9F8; border-bottom: 1px solid var(--line); min-height: 42px; }
+.path { display: flex; align-items: center; gap: 8px; }
+.path-l { color: var(--muted); font-size: 12px; margin-right: 2px; }
+.crumb { color: var(--blue); text-decoration: none; padding: 2px 6px; border-radius: 3px; }
+a.crumb:hover { background: #E8F3FF; }
+.crumb.here { color: var(--ink); background: #fff; border: 1px solid var(--line); }
+.sep { color: #A19F9D; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: 12px; border: 1px solid #B3D6FF; background: #E8F3FF; color: #0B5CAB; border-radius: 12px; padding: 3px 10px; cursor: pointer; }
+.chip:hover { background: #D3E9FF; }
+
+/* ---------------- Main area ---------------- */
+.main { padding: 16px 20px 40px; }
+.loading { color: var(--muted); }
+
+/* KPI tiles */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--yellow); border-radius: var(--radius); padding: 12px 14px 8px; min-width: 0; }
+.kpi-l { color: var(--muted); font-size: 12.5px; }
+.kpi-v { font-size: 26px; font-weight: 600; margin: 2px 0 2px; letter-spacing: -.3px; }
+.delta { font-size: 12px; display: block; min-height: 16px; margin-bottom: 4px; }
+.delta em { font-style: normal; color: var(--muted); margin-left: 3px; }
+.delta.good { color: var(--good); }
+.delta.bad { color: var(--bad); }
+.delta.neutral { color: #8a8886; }
+.spark { margin: 0 -4px; }
+
+/* 12-column grid for the cards */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px 12px; min-width: 0; }
+.card-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.card-h h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.card-h .sub { font-size: 12px; color: var(--muted); text-align: right; }
+.span-3 { grid-column: span 3; } .span-4 { grid-column: span 4; } .span-5 { grid-column: span 5; }
+.span-6 { grid-column: span 6; } .span-7 { grid-column: span 7; } .span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+/* ---------------- Chart styling ---------------- */
+.chart svg text { font-family: var(--font); }
+.axis { font-size: 11px; fill: var(--muted); }
+.axis.small { font-size: 10px; }
+.val { font-size: 11px; fill: var(--ink); }
+.cell-t { font-size: 11px; }
+/* SVG grid lines use class "gl" so they do not clash with the layout class ".grid" */
+line.gl { stroke: #EDEBE9; stroke-width: 1; }
+.bar { transition: opacity .12s; }
+.bar:hover, .slice:hover, .bubble:hover { opacity: .8; }
+.dim { opacity: .3; }                                        /* cross-filtered-out items fade */
+.clickable { cursor: pointer; }
+.strip:hover { fill: rgba(17, 141, 255, .08); }
+.donut-val { font-size: 17px; font-weight: 600; fill: var(--ink); }
+.funnel-t { font-size: 12.5px; fill: #fff; font-weight: 600; }
+.funnel-v { font-size: 12px; fill: #fff; }
+.geo-land { fill: #EDEBE9; stroke: #C8C6C4; stroke-width: 1.2; }
+.bubble { fill: var(--blue); fill-opacity: .55; stroke: #0B5CAB; stroke-width: 1.2; }
+.geo-t { font-size: 10.5px; fill: var(--ink); pointer-events: none; }
+
+.legend-row { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.legend-row i, .legend-list i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+.donut-wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+.legend-list { list-style: none; margin: 0; padding: 0; font-size: 12.5px; min-width: 150px; flex: 1; }
+.legend-list li { display: flex; align-items: center; padding: 4px 6px; border-radius: 3px; }
+.legend-list li.clickable:hover { background: #F3F2F1; }
+.legend-list .lg-name { flex: 1; }
+.legend-list .lg-val { color: var(--muted); }
+.legend-list li.dim { opacity: .4; }
+
+/* Tooltip */
+.tooltip { position: fixed; z-index: 100; pointer-events: none; background: #252423; color: #fff; padding: 7px 10px; border-radius: 4px; font-size: 12px; line-height: 1.45; max-width: 260px; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.tooltip[hidden] { display: none; }
+
+/* ---------------- Tables ---------------- */
+.table-wrap { overflow-x: auto; }
+table.dt { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dt th { text-align: left; font-weight: 600; color: var(--muted); padding: 8px 10px; border-bottom: 2px solid var(--line); cursor: pointer; white-space: nowrap; user-select: none; }
+.dt th:hover { color: var(--ink); }
+.dt td { padding: 7px 10px; border-bottom: 1px solid #F0EEEC; white-space: nowrap; }
+.dt tbody tr:hover { background: #FAF9F8; }
+.dt .num { text-align: right; font-variant-numeric: tabular-nums; }
+.dt tfoot td { font-weight: 600; border-top: 2px solid var(--line); border-bottom: 0; background: #FAF9F8; }
+.dt .empty { text-align: center; color: var(--muted); padding: 24px; }
+.pager { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+
+/* ---------------- Reports page controls ---------------- */
+.report-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.report-controls label { display: flex; flex-direction: column; font-size: 11.5px; color: var(--muted); gap: 2px; }
+.grow { flex: 1; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1100px) {
+  .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }   /* cards stack on tablets */
+}
+@media (max-width: 800px) {
+  .menu-btn { display: inline-block; }
+  .sidebar { position: fixed; z-index: 50; left: -250px; transition: left .2s; }   /* sidebar slides in on phones */
+  body.nav-open .sidebar { left: 0; }
+  .filters { margin-left: 0; width: 100%; }
+  .filters label { flex: 1 1 42%; }
+  select { width: 100%; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------------- Print (Reports > Print button) ---------------- */
+@media print {
+  .sidebar, .topbar, .report-controls, .pager, .menu-btn { display: none !important; }
+  body { background: #fff; }
+  .card { break-inside: avoid; }
+}

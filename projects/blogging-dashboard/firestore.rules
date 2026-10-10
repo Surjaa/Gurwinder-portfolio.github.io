@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isOwner() {
+      return signedIn() && resource.data.ownerId == request.auth.uid;
+    }
+    function validPost() {
+      let d = request.resource.data;
+      return d.title is string && d.title.size() > 0 && d.title.size() <= 120
+        && d.content is string && d.content.size() < 300000
+        && d.imageUrl is string && d.imageUrl.size() < 700000
+        && (d.status == 'draft' || d.status == 'published');
+    }
+
+    match /posts/{postId} {
+      // Signed-in users can read published posts; only the owner can read drafts.
+      allow read: if signedIn()
+        && (resource.data.status == 'published' || isOwner());
+
+      // Only the signed-in user can create a post, and only as themselves.
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && validPost();
+
+      // The owner can edit everything except who owns it.
+      // Anyone signed in can only touch likes and comments on published posts.
+      allow update: if (isOwner()
+          && request.resource.data.ownerId == resource.data.ownerId
+          && validPost())
+        || (signedIn()
+          && resource.data.status == 'published'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes', 'comments']));
+
+      allow delete: if isOwner();
+    }
+  }
+}
