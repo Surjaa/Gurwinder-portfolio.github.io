@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-accent="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enterprise SaaS Dashboard | Commerce pulse</title>
+  <meta name="description" content="The Enterprise SaaS Dashboard is a B2B commerce dashboard with a live business pulse, command palette and plain-English data questions. Built with vanilla HTML, CSS and JavaScript.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    /* Apply saved theme before first paint so the page never flashes the wrong colours */
+    (function () {
+      try {
+        var t = JSON.parse(localStorage.getItem('saas-dash.theme') || '"system"');
+        var a = JSON.parse(localStorage.getItem('saas-dash.accent') || '"indigo"');
+        var s = JSON.parse(localStorage.getItem('saas-dash.sidebar') || '"open"');
+        var d = JSON.parse(localStorage.getItem('saas-dash.density') || '"comfortable"');
+        var dark = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var r = document.documentElement;
+        r.dataset.theme = dark ? 'dark' : 'light';
+        r.dataset.accent = a; r.dataset.sidebar = s; r.dataset.density = d;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<!-- ========== LOGIN ========== -->
+<div id="login" class="login" hidden>
+  <section class="login-art" aria-hidden="true">
+    <div class="brand brand-lg"><span class="logo"></span>Enterprise SaaS Dashboard</div>
+    <div>
+      <h2>Know how your business feels, not just what it earned.</h2>
+      <p>One heartbeat for revenue, orders and customers. It speeds up when something happens.</p>
+    </div>
+    <svg data-pulse class="pulse-big" preserveAspectRatio="none"></svg>
+  </section>
+  <section class="login-form">
+    <form id="loginForm" novalidate>
+      <h1>Sign in</h1>
+      <p class="sub">Use any valid email and a password of 6+ characters, or tap the demo button.</p>
+      <label class="field"><span>Work email</span><input name="email" type="email" autocomplete="email" placeholder="you@company.com"><small class="err"></small></label>
+      <label class="field"><span>Password</span><input name="password" type="password" autocomplete="current-password" placeholder="At least 6 characters"><small class="err"></small></label>
+      <button class="btn primary block" type="submit">Sign in</button>
+      <button class="btn block" type="button" id="demoLogin">Use the demo account</button>
+    </form>
+  </section>
+</div>
+
+<!-- ========== APP SHELL ========== -->
+<div id="app" class="app" hidden>
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="brand"><span class="logo"></span><span class="brand-name">Enterprise SaaS Dashboard</span></div>
+    <nav id="nav"></nav>
+    <div class="side-foot">
+      <div class="plan-chip"><b>Growth plan</b><span>9 of 12 seats used</span><div class="meter"><i style="width:75%"></i></div></div>
+    </div>
+  </aside>
+  <div class="scrim" data-action="nav-close"></div>
+
+  <div class="col">
+    <header class="topbar">
+      <button class="icon-btn" data-action="nav-toggle" aria-label="Toggle sidebar" id="navBtn"></button>
+      <button class="searchbtn" data-action="palette" aria-label="Open search and command palette">
+        <span id="searchIcon"></span><span class="searchtxt">Search, jump or ask the dashboard</span><kbd>Ctrl K</kbd>
+      </button>
+      <div class="pulse-mini" title="Live order pulse"><svg data-pulse preserveAspectRatio="none"></svg><span>Live</span></div>
+      <button class="icon-btn" data-action="theme" aria-label="Switch between light and dark mode" id="themeBtn"></button>
+      <div class="dd" data-dd>
+        <button class="icon-btn" data-action="dd" aria-label="Notifications" aria-haspopup="true" id="bellBtn"><span id="bellIcon"></span><b class="badge" id="badge" hidden>0</b></button>
+        <div class="dd-menu wide" hidden id="notifMenu"></div>
+      </div>
+      <div class="dd" data-dd>
+        <button class="user-btn" data-action="dd" aria-haspopup="true" aria-label="Account menu"><span class="avatar" id="userAvatar"></span><span class="uname" id="userName"></span></button>
+        <div class="dd-menu" hidden>
+          <a href="#/profile">Your profile</a>
+          <a href="#/settings">Settings</a>
+          <a href="#/billing">Billing</a>
+          <hr>
+          <button data-action="signout">Sign out</button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"></main>
+  </div>
+</div>
+
+<div id="tip" class="tip" hidden></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="overlay"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Management Application: the project board with a pulse</title>
+  <meta name="theme-color" content="#141830">
+  <meta property="og:title" content="Project Management Application: the project board with a pulse">
+  <meta property="og:description" content="A project management app where every task glows hotter as it gets more urgent.">
+  <meta name="description" content="The Project Management Application is a project board where every task shows how much attention it needs right now.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app" id="app">
+
+    <aside class="side" id="side" aria-label="Main navigation">
+      <a class="brand" href="#/workspace" data-act="nav" data-id="workspace" aria-label="Project Management Application home">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.6 2.2c.4 3.2 2.1 4.9 3.9 6.7 1.7 1.7 3.2 3.4 3.2 6.2A7.7 7.7 0 0 1 12 22.8a7.7 7.7 0 0 1-7.7-7.7c0-2.2 1-4 2.3-5.3.2 1.5 1 2.5 2.1 2.9-.5-3.6.8-7.1 3.9-10.5z"/></svg>
+        <span>Project Management Application</span>
+      </a>
+      <nav id="nav"></nav>
+      <p class="side-foot">Cards glow hotter as they get more urgent. Press <kbd>Ctrl</kbd> <kbd>K</kbd> for commands.</p>
+    </aside>
+
+    <div class="main">
+      <header class="top">
+        <button class="icon-btn menu-btn" data-act="toggle-menu" aria-label="Open menu">
+          <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <label class="search">
+          <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search" type="search" placeholder="Search tasks, people, labels" autocomplete="off" aria-label="Search tasks">
+        </label>
+        <button class="btn ghost hide-sm" data-act="palette-open" title="Command palette">Commands <kbd>Ctrl K</kbd></button>
+        <button class="btn hide-sm" id="tm-btn" data-act="tm-toggle">
+          <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Time Machine
+        </button>
+        <button class="icon-btn bell" data-act="toggle-notif" aria-label="Notifications">
+          <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="badge" id="bell-badge" hidden>0</span>
+        </button>
+        <span id="me" class="me"></span>
+      </header>
+      <div id="tm-root"></div>
+      <main id="view" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div id="notif-root"></div>
+  <div id="user-root"></div>
+  <div id="modal-root"></div>
+  <div id="palette-root"></div>
+  <div id="toast-root" aria-live="polite"></div>
+
+  <script src="store.js"></script>
+  <script src="views.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
