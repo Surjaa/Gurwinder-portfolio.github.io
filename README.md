@@ -90,6 +90,7 @@ The portfolio presents nine projects in two groups.
 | Project | Description | Links |
 | --- | --- | --- |
 | **Music Streaming App** | Upload or link your own audio and video, build playlists, play online or offline | [Live](https://surjaa.github.io/Music-app/) |
+| **Chroma Tilt** | A 3D marble tilt puzzle with 1000 colour-matching levels, free to play in the browser | [Live](https://surjaa.github.io/ChromaTilt.io/) |
 | **Coffee Brand Website** | Responsive brand site with scroll animations and interactive product sections | [Live](https://surjaa.github.io/Coffee-website.github.io/) |
 | **Community Blogging Platform** | Sign in, write posts and upload visual content (in progress) | [Live](https://surjaa.github.io/Blogging-platform.github.io/) |
 | **Security Score Web App** | Password and email security checks with an interactive dashboard and recommendations | [GitHub](https://github.com/surjaa) |
