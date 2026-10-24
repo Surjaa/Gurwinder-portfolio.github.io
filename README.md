@@ -64,7 +64,7 @@ Instead of just listing projects, the site lets visitors **open each project, re
 | **Services** | Front-end development, responsive design, animation and interaction, documentation and content |
 | **Skills** | Filterable toolbox with proficiency dots |
 | **Process** | The five steps followed on every project, advancing automatically |
-| **Projects** | Nine projects, each with a summary, features, stack and run instructions |
+| **Projects** | Top five projects, each with a summary, features, stack and run instructions; every other repository is listed under View All Projects |
 | **Lab** | Flexbox playground, glass-card styler and easing visualizer with live code output |
 | **UI Kit** | Toggle switch, accordion, star rating, like button, toasts, skeleton loader, password strength meter, before/after slider and native dialog |
 | **Playground** | A Snake game played with arrow keys, WASD or swipes |
@@ -74,27 +74,15 @@ Instead of just listing projects, the site lets visitors **open each project, re
 
 ## Featured Projects
 
-The portfolio presents nine projects in two groups.
-
-### Business apps and dashboards
+The main Projects section shows the top five projects. All other repositories are listed under **View All Projects**, with Code and Live demo links.
 
 | Project | Description | Stack |
 | --- | --- | --- |
-| **Operations Command Center** | Ten-screen operations dashboard (sales, inventory, procurement, vendors, people) with URL-based filters, data tables and CSV/Excel export | React, React Router, Recharts, Vite, Flask, SQLite |
-| **OpsPulse** | Twelve-screen BI dashboard with roles (admin, manager, viewer), a Ctrl+K command bar, toasts, drawers and a mock API | React, React Router, Recharts, Vite, SheetJS |
+| **ERP Business Management System** | Browser-based ERP demo covering purchasing, inventory, sales, accounting, manufacturing and HR | HTML, CSS, JavaScript, Bootstrap 5 |
+| **Project Management Application** | Kanban board with a task heat engine, time-machine slider, calendar, timeline and reports | HTML, CSS, JavaScript |
+| **Enterprise SaaS Dashboard** | B2B commerce dashboard with live orders, analytics, command palette and SVG charts | HTML, CSS, JavaScript, SVG |
 | **BI Analytics Portal** | Power BI style portal with its own hand-written SVG chart library, drill-downs and 219,200 rows of data; opens with a double-click | HTML, CSS, JavaScript |
 | **Larder Store** | Complete online store with filters, compare, cart, four-step checkout, order tracking and an admin page | HTML, CSS, JavaScript, Node.js |
-
-### Websites and smaller apps
-
-| Project | Description | Links |
-| --- | --- | --- |
-| **Music Streaming App** | Upload or link your own audio and video, build playlists, play online or offline | [Live](https://surjaa.github.io/Music-app/) |
-| **Chroma Tilt** | A 3D marble tilt puzzle with 1000 colour-matching levels, free to play in the browser | [Live](https://surjaa.github.io/ChromaTilt.io/) |
-| **Coffee Brand Website** | Responsive brand site with scroll animations and interactive product sections | [Live](https://surjaa.github.io/Coffee-website.github.io/) |
-| **Community Blogging Platform** | Sign in, write posts and upload visual content (in progress) | [Live](https://surjaa.github.io/Blogging-platform.github.io/) |
-| **Security Score Web App** | Password and email security checks with an interactive dashboard and recommendations | [GitHub](https://github.com/surjaa) |
-| **This Portfolio** | The site you are looking at, built with plain HTML, CSS and JavaScript | [Code](https://github.com/surjaa/Gurwinder-portfolio.github.io) |
 
 ## Tech Stack
 
