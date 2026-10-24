@@ -82,7 +82,7 @@
     setTimeout(tick, 1800); // wait for the intro animation before starting
   } // end of roleTyper
 
-  var HERO_CODE = "const developer = {\n  name: 'Gurwinder Parhar',\n  role: 'Software Engineer',\n  stack: ['HTML5', 'CSS3', 'JS', 'React'],\n  openToWork: true,\n};"; // the code text typed into the hero card
+  var HERO_CODE = "const developer = {\n  name: 'Gurwinder Parhar',\n  role: 'Full Stack Developer',\n  stack: ['HTML5', 'CSS3', 'JS', 'React'],\n  openToWork: true,\n};"; // the code text typed into the hero card
   var heroCodeStarted = false; // makes sure the typing only starts once
   function typeHeroCode() { // types the hero code card one character at a time
     if (heroCodeStarted) return; heroCodeStarted = true; // stop if it already started, otherwise mark it as started
@@ -308,8 +308,8 @@
   } // end of panels
 
   /* ---------- Project data ---------- */
-  var GROUPS = { apps: 'Business apps and dashboards', web: 'Websites and smaller apps' }; // headings that group the projects
-  var FEATURED = ['erp', 'project-management', 'saas-dashboard', 'bi', 'larder']; // the top 5 projects shown in full on the main Projects section
+  var GROUPS = { apps: 'Business apps and dashboards', web: 'Websites and smaller apps', games: 'Browser games' }; // headings that group the projects
+  var FEATURED = ['erp', 'project-management', 'saas-dashboard', 'bi', 'larder', 'rps', 'snake3d', 'canon']; // the top 5 projects shown in full on the main Projects section
 
   /* Every GitHub repository, shown in the animated list under the Projects section */
   var REPOS = [ // name, repo folder on GitHub, language, and whether a live demo exists
@@ -322,9 +322,9 @@
     { title: 'Enterprise SaaS Dashboard', repo: 'Enterprise-SaaS-Dashboard.github.io', lang: 'JavaScript', live: true },
     { title: 'Security Score App', repo: 'Security-Score-App.github.io', lang: 'JavaScript', live: true },
     { title: 'Music App', repo: 'Music-app', lang: 'JavaScript', live: true },
-    { title: 'Rock Paper Scissor', repo: 'Rock-Paper-Scissor.github.io', lang: 'JavaScript', live: true },
-    { title: 'Snake Game', repo: 'Snake-Game', lang: 'Python', live: false },
-    { title: 'Canon Armed', repo: 'Canon-Armed', lang: 'Python', live: false },
+    { title: 'Rock Paper Scissor 3D', repo: 'Rock-Paper-Scissor.io', lang: 'JavaScript', live: true },
+    { title: 'Snake 3D', repo: 'Snake-3D.io', lang: 'JavaScript', live: true },
+    { title: 'Canon Armed', repo: 'Canon-armed.io', lang: 'JavaScript', live: true },
     { title: 'Coffee Website', repo: 'Coffee-website.github.io', lang: 'JavaScript', live: true },
     { title: 'GitHub Profile', repo: 'Surjaa', lang: 'Profile README', live: false }
   ]; // all 14 repositories, including the profile README
@@ -422,7 +422,28 @@
       summary: 'The site you are on. It is built without frameworks to show what plain HTML, CSS and JavaScript can do: animation, interaction and a layout that adapts to every screen.', // description
       features: ['Loader, particle hero and scroll progress', 'Project pages with a resizable device frame', 'A live CSS lab with Flexbox, card and easing tools', 'Keyboard friendly, with reduced-motion support'], // bullet points
       stack: ['HTML5', 'CSS3', 'JavaScript'] // technologies
-    } // end of project 9
+    }, // end of project 9
+    { // ---- project 10 ----
+      id: 'rps', group: 'games', title: 'Rock Paper Scissor 3D', kind: 'Browser game', status: 'Live', tone: 'sun', // identity and colour
+      img: '', live: 'https://surjaa.github.io/Rock-Paper-Scissor.io/', links: [], // no screenshot; live demo
+      summary: 'Play rock, paper, scissors against the computer in a live 3D arena with synth music. The first side to reach 10 points wins.', // description
+      features: ['Live 3D arena with synthesized music', 'First side to 10 points wins', 'Keyboard controls: keys 1 to 3, or R, P and S', 'Move cards as a fallback on devices without 3D'], // bullet points
+      stack: ['HTML5', 'JavaScript'] // technologies
+    }, // end of project 10
+    { // ---- project 11 ----
+      id: 'snake3d', group: 'games', title: 'Snake 3D', kind: 'Browser game', status: 'Live', tone: 'teal', // identity and colour
+      img: '', live: 'https://surjaa.github.io/Snake-3D.io/', links: [], // no screenshot; live demo
+      summary: 'A 3D take on the classic Snake game. Steer a growing snake, eat, and avoid your own tail and the crystals. The board wraps at the edges.', // description
+      features: ['WebGL 3D board with wrap-around edges', 'Menu with difficulty settings', 'Optional music and sound effects', 'Avoid your own tail and the crystals'], // bullet points
+      stack: ['HTML5', 'WebGL', 'JavaScript'] // technologies
+    }, // end of project 11
+    { // ---- project 12 ----
+      id: 'canon', group: 'games', title: 'Canon Armed', kind: 'Arcade game', status: 'Live', tone: 'violet', // identity and colour
+      img: '', live: 'https://surjaa.github.io/Canon-armed.io/', links: [], // no screenshot; live demo
+      summary: 'A browser arcade shooter. Defend a sector by stopping alien drones with a cannon.', // description
+      features: ['Three difficulty levels: Normal, Medium and Hard', 'Power-ups and score multipliers', 'Wave-based play', 'Touch, mouse drag and keyboard controls'], // bullet points
+      stack: ['HTML5', 'JavaScript'] // technologies
+    } // end of project 12
   ]; // end of PROJECTS
 
   /* Drawn stand-ins, shown until a real screenshot loads on top */
@@ -480,7 +501,7 @@
         '<g class="float"><circle cx="400" cy="220" r="104" fill="#3B3689" stroke="#FFC53D" stroke-width="6"/><text x="400" y="250" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="800" font-size="92" fill="#FFC53D">GP</text></g>' + // floating avatar circle with the letters GP
         '<rect x="260" y="360" width="280" height="22" rx="11" fill="#F6F3FF"/><rect x="310" y="396" width="180" height="14" rx="7" fill="#B9B3E6"/><rect x="330" y="430" width="140" height="36" rx="18" fill="#FFC53D"/>' // headline bars and a button
     }; // end of shapes
-    return open + shapes[id] + '</svg>'; // join the opening tag, the shapes for this project and the closing tag
+    return open + (shapes[id] || '<rect width="800" height="500" fill="#1B2040"/>') + '</svg>'; // join the opening tag, the shapes for this project and the closing tag
   } // end of art
 
   /* ---------- Skills ---------- */
@@ -874,7 +895,7 @@
 
     var slot = $('#uiSkSlot'), skBtn = $('#uiSkBtn'), skBusy = false; // the loader area, its button, and a busy flag
     function row(cls, real) { // builds the profile row (placeholder or real)
-      return '<div class="sk-row ' + cls + '"><div class="sk-av' + (real ? ' real' : '') + '">' + (real ? 'GP' : '') + '</div><div class="sk-lines' + (real ? ' real' : '') + '">' + (real ? '<b>Gurwinder Parhar</b><span>Software Engineer</span>' : '<i></i><i></i>') + '</div></div>'; // avatar plus text lines
+      return '<div class="sk-row ' + cls + '"><div class="sk-av' + (real ? ' real' : '') + '">' + (real ? 'GP' : '') + '</div><div class="sk-lines' + (real ? ' real' : '') + '">' + (real ? '<b>Gurwinder Parhar</b><span>Full Stack Developer</span>' : '<i></i><i></i>') + '</div></div>'; // avatar plus text lines
     } // end of row
     skBtn.addEventListener('click', function () { // when the button is clicked
       if (skBusy) return; skBusy = true; skBtn.textContent = 'Loading...'; // ignore clicks while loading
