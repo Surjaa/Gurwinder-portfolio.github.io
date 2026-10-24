@@ -332,9 +332,9 @@
   var PROJECTS = [ // the list of projects shown in the Projects section
     { // ---- ERP business management system ----
       id: 'erp', group: 'apps', title: 'ERP Business Management System', kind: 'ERP system', status: 'Live', tone: 'teal', // identity and colour
-      img: 'Images/shots/erp-dashboard.jpg', live: 'https://surjaa.github.io/ERP---Business-Management-System.github.io/', links: [], // main screenshot and the runnable demo path
-      shots: [['Images/shots/erp-dashboard.jpg', 'Dashboard'], ['Images/shots/erp-inventory.jpg', 'Inventory'], ['Images/shots/erp-sales.jpg', 'Sales'], ['Images/shots/erp-purchasing.jpg', 'Purchasing'], ['Images/shots/erp-employees.jpg', 'Employees']], // gallery: image path and tab label
-      peek: [['Images/previews/erp-1.jpg', 'Dashboard'], ['Images/previews/erp-2.jpg', 'Inventory']], // two clickable screenshots under the preview: image path and caption
+      img: 'Images/shots/erp-overview.png', live: 'https://surjaa.github.io/ERP---Business-Management-System.github.io/', links: [], // main screenshot and the runnable demo path
+      shots: [['Images/shots/erp-overview.png', 'Overview'], ['Images/shots/erp-inventory-updated.png', 'Inventory'], ['Images/shots/erp-fms.png', 'FMS']], // gallery: image path and tab label
+      peek: [['Images/shots/erp-overview.png', 'Overview'], ['Images/shots/erp-fms.png', 'FMS']], // two clickable screenshots under the preview: image path and caption
       summary: 'A browser-based ERP demo for a small trading company. Buying from suppliers, stock in warehouses, sales and invoices, accounting, manufacturing, staff attendance and leave all run in one place, instead of many spreadsheets. Plain HTML, CSS and JavaScript with local Bootstrap 5 and no build step.', // description
       features: ['Eleven modules in one sidebar: sales, purchasing, inventory, accounting, manufacturing, people, maintenance, FMS, contacts, documents and reports', 'Stock levels, warehouses and stock movements, with low-stock alerts on the dashboard', 'Sales orders and invoices with overdue and pending flags, plus purchase orders and supplier delivery tracking', 'Employee directory, attendance and leave requests that are approved from the dashboard', 'Ctrl+K search and jump, notifications, dark mode and CSV export on every table', 'Sign-up with a password strength meter and a one-click demo account'], // bullet points
       stack: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap 5'], // technologies
